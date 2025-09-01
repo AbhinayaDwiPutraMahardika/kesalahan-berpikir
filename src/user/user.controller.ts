@@ -29,7 +29,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  delet(@Param('id') id: string): string{
+  delete(@Param('id') id: string): string{
     return `This action delete user id ${id}`
   }
 
