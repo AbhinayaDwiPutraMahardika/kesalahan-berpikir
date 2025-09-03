@@ -1,12 +1,15 @@
 import { Controller, Get, Req, Param, Post, Put, Delete, Query } from '@nestjs/common';
 import type { Request } from 'express';
+import { UserService } from './user.service';
 
 @Controller('kuceng')
 export class UserController {
-  // @Get('kabeh')
-  // findAll(@Req() request: Request): string {
-  //   return 'This action returns all kuceng';
-  // }
+  constructor(private UserService: UserService) { }
+  
+  @Get('kabeh')
+  findAll(@Req() request: Request){
+    return this.UserService.findAll();
+  }
 
   // @Get('oren')
   // findId(@Req() request: Request): string {
