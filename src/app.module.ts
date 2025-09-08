@@ -7,9 +7,10 @@ import { MenuController } from './menu/menu.controller';
 import { MenuService } from './menu/menu.service';
 import { TodosModule } from './todos/todos.module';
 import { TodosService } from './todos/todos.service';
+import { SiswaModule } from './siswa/siswa.module';
 
 @Module({
-  imports: [TodosModule],
+  imports: [TodosModule, SiswaModule],
   controllers: [AppController, UserController, MenuController],
   providers: [AppService, UserService, MenuService,],
 })
