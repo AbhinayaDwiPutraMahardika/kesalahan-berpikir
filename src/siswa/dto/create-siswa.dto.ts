@@ -1,19 +1,40 @@
-import { IsString, IsInt, Min, Max, Length } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsNotEmpty, IsString, IsNumber, Min } from 'class-validator';
 
 export class CreateSiswaDto {
+  @IsNotEmpty()
   @IsString()
-  @Length(5, 20)
   nisn: string;
 
+  @IsNotEmpty()
   @IsString()
-  @Length(3, 50)
   nama: string;
 
+  @IsNotEmpty()
+  @IsNumber()
+  @Type(() => Number)
+  @Min(1)
+  umur: number;
+
   @IsString()
+  @IsNotEmpty()
   alamat: string;
 
-  @IsInt()
-  @Min(6)
-  @Max(25)
-  umur: number;
 }
+
+
+// @IsString()
+// @Length(5, 20)
+// nisn: string;
+
+// @IsString()
+// @Length(3, 50)
+// nama: string;
+
+// @IsString()
+// alamat: string;
+
+// @IsInt()
+// @Min(6)
+// @Max(25)
+// umur: number;

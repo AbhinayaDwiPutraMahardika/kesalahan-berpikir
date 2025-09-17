@@ -6,11 +6,12 @@ import { UserService } from './user/user.service';
 import { MenuController } from './menu/menu.controller';
 import { MenuService } from './menu/menu.service';
 import { TodosModule } from './todos/todos.module';
-import { TodosService } from './todos/todos.service';
 import { SiswaModule } from './siswa/siswa.module';
+import { UsersModule } from './users/users.module';
+import { PrismaModule } from 'prisma/prisma.module';
 
 @Module({
-  imports: [TodosModule, SiswaModule],
+  imports: [PrismaModule, TodosModule, SiswaModule, UsersModule],
   controllers: [AppController, UserController, MenuController],
   providers: [AppService, UserService, MenuService,],
 })

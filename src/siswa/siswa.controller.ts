@@ -1,13 +1,23 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Patch,
+  Delete,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { SiswaService } from './siswa.service';
 import { CreateSiswaDto } from './dto/create-siswa.dto';
 import { UpdateSiswaDto } from './dto/update-siswa.dto';
-
 @Controller('siswa')
 export class SiswaController {
   constructor(private readonly siswaService: SiswaService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   create(@Body() createSiswaDto: CreateSiswaDto) {
     return this.siswaService.create(createSiswaDto);
   }

@@ -5,19 +5,17 @@ import { Siswa } from './entities/siswa.entity';
 
 @Injectable()
 export class SiswaService {
-  private siswa: Siswa[] = [];
-
-  create(createSiswaDto: CreateSiswaDto): Siswa {
-    const newSiswa: Siswa = { ...createSiswaDto };
-    this.siswa.push(newSiswa);
-    return newSiswa;
+  private readonly siswa: CreateSiswaDto[] = [];
+  create(createSiswaDto: CreateSiswaDto) {
+    this.siswa.push(createSiswaDto);
+    return 'This action adds a new siswa';
   }
 
-  findAll(): Siswa[] {
+  findAll(): CreateSiswaDto[] {
     return this.siswa;
   }
 
-  findOne(nisn: string): Siswa {
+  findOne(nisn: string): CreateSiswaDto {
     const siswa = this.siswa.find((s) => s.nisn === nisn);
     if (!siswa) {
       throw new NotFoundException(`Siswa dengan NISN ${nisn} tidak ditemukan`);
