@@ -2,42 +2,120 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PrismaService } from 'prisma/prisma.service';
+import { BcryptService } from 'src/bcrypt/bcrypt.service';
+
 
 @Injectable()
 export class UsersService {
-  constructor( private prisma: PrismaService ) {}
-  
-create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
-
-  async findAll() {
+  constructor(private prisma: PrismaService, private readonly bcrypt: BcryptService) { }
+  async create(createUserDto: CreateUserDto) {
     try {
-      const users = await this.prisma.user.findMany()
+      const { name, email, password } = createUserDto;
+      const users = await this.prisma.user.create({
+        data: {
+          name,
+          email,
+          password: await this.bcrypt.hashPassword(password),
+        },
+      });
       return {
         succes: true,
-        massage: "user data dound succesfully",
+        message: 'user data found succesfully',
         data: users
-      }
+      };
     } catch (error) {
       return {
         succes: false,
         message: `error when get user:${error.message}`,
+        data: null
+      };
+    }
+  }
+
+  async findAll() {
+    try {
+      const users = await this.prisma.user.findMany();
+      return {
+        succes: true,
+        message: 'user data found succesfully',
+        data: users
+      };
+    } catch (error) {
+      return {
+        succes: false,
+        message: `error when get user:${error.message}`,
+        data: null,
+      };
+    }
+  }
+
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      const { name, email, password } = updateUserDto
+      const findUser = await this.prisma.user.findFirst({
+        where: { id: id }
+      })
+      if (!findUser) {
+        return {
+          success: false,
+          message: `User does not exist`,
+          data: null
+        }
+      }
+
+      const updateUser = await this.prisma.user.update({
+        where: { id: id },
+        data: {
+          name: name ?? findUser.name,
+          email: email ?? findUser.email,
+          password: password ? await this.bcrypt.hashPassword(password) : findUser.password
+        }
+      })
+      return {
+        success: true,
+        message: `New User has updated`,
+        data: updateUser
+      }
+    } catch (error) {
+      return {
+        success: false,
+        message: `error when update user: ${error.message}`,
+        data: null
+      }
+    }
+  }
+
+  async remove(id: number) {
+    try {
+      const findUser = await this.prisma.user.findFirst({
+        where:{ id: id}
+      })
+      if (!findUser) {
+        return {
+          success: false,
+          message: `User does not exist`,
+          data:null
+        }
+      }
+
+      const deletedUser = await this.prisma.user.delete({
+        where: { id: id }
+      })
+      return{
+        succes: true,
+        message: `User has deleted`,
+        data: deletedUser
+      }
+    } catch (error) {
+      return {
+        success: false,
+        message: `error when delete user: ${error.message}`,
         data:null
       }
     }
-    // return `This action returns all users`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  // update(id: number, updateUserDto: UpdateUserDto) {
+  //   return `This action updates a #${id} user`;
+  // }
 }

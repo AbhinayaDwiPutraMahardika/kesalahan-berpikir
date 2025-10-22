@@ -9,10 +9,13 @@ import { TodosModule } from './todos/todos.module';
 import { SiswaModule } from './siswa/siswa.module';
 import { UsersModule } from './users/users.module';
 import { PrismaModule } from 'prisma/prisma.module';
+import { BcryptService } from './bcrypt/bcrypt.service';
+import { BcryptModule } from './bcrypt/bcrypt.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [PrismaModule, TodosModule, SiswaModule, UsersModule],
+  imports: [PrismaModule, TodosModule, SiswaModule, UsersModule, BcryptModule, AuthModule],
   controllers: [AppController, UserController, MenuController],
-  providers: [AppService, UserService, MenuService,],
+  providers: [AppService, UserService, MenuService, BcryptService,],
 })
 export class AppModule {}
