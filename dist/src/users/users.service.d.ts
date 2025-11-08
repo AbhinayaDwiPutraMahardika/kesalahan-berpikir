@@ -10,13 +10,13 @@ export declare class UsersService {
         succes: boolean;
         message: string;
         data: {
+            id: number;
             name: string;
             email: string;
-            role: import("@prisma/client").$Enums.UserRole;
             password: string;
+            role: import("@prisma/client").$Enums.UserRole;
             createAt: Date;
             updateAt: Date;
-            id: number;
         };
     } | {
         succes: boolean;
@@ -27,13 +27,13 @@ export declare class UsersService {
         succes: boolean;
         message: string;
         data: {
+            id: number;
             name: string;
             email: string;
-            role: import("@prisma/client").$Enums.UserRole;
             password: string;
+            role: import("@prisma/client").$Enums.UserRole;
             createAt: Date;
             updateAt: Date;
-            id: number;
         }[];
     } | {
         succes: boolean;
@@ -48,13 +48,13 @@ export declare class UsersService {
         success: boolean;
         message: string;
         data: {
+            id: number;
             name: string;
             email: string;
-            role: import("@prisma/client").$Enums.UserRole;
             password: string;
+            role: import("@prisma/client").$Enums.UserRole;
             createAt: Date;
             updateAt: Date;
-            id: number;
         };
     }>;
     remove(id: number): Promise<{
@@ -66,13 +66,13 @@ export declare class UsersService {
         succes: boolean;
         message: string;
         data: {
+            id: number;
             name: string;
             email: string;
-            role: import("@prisma/client").$Enums.UserRole;
             password: string;
+            role: import("@prisma/client").$Enums.UserRole;
             createAt: Date;
             updateAt: Date;
-            id: number;
         };
         success?: undefined;
     }>;
