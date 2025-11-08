@@ -8,12 +8,13 @@ export declare class UsersController {
         succes: boolean;
         message: string;
         data: {
-            id: number;
             name: string;
             email: string;
+            role: import("@prisma/client").$Enums.UserRole;
             password: string;
             createAt: Date;
             updateAt: Date;
+            id: number;
         };
     } | {
         succes: boolean;
@@ -24,12 +25,13 @@ export declare class UsersController {
         succes: boolean;
         message: string;
         data: {
-            id: number;
             name: string;
             email: string;
+            role: import("@prisma/client").$Enums.UserRole;
             password: string;
             createAt: Date;
             updateAt: Date;
+            id: number;
         }[];
     } | {
         succes: boolean;
@@ -44,12 +46,13 @@ export declare class UsersController {
         success: boolean;
         message: string;
         data: {
-            id: number;
             name: string;
             email: string;
+            role: import("@prisma/client").$Enums.UserRole;
             password: string;
             createAt: Date;
             updateAt: Date;
+            id: number;
         };
     }>;
     remove(id: string): Promise<{
@@ -61,12 +64,13 @@ export declare class UsersController {
         succes: boolean;
         message: string;
         data: {
-            id: number;
             name: string;
             email: string;
+            role: import("@prisma/client").$Enums.UserRole;
             password: string;
             createAt: Date;
             updateAt: Date;
+            id: number;
         };
         success?: undefined;
     }>;

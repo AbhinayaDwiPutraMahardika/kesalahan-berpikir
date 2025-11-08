@@ -20,12 +20,13 @@ const users_module_1 = require("./users/users.module");
 const prisma_module_1 = require("../prisma/prisma.module");
 const bcrypt_service_1 = require("./bcrypt/bcrypt.service");
 const bcrypt_module_1 = require("./bcrypt/bcrypt.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, todos_module_1.TodosModule, siswa_module_1.SiswaModule, users_module_1.UsersModule, bcrypt_module_1.BcryptModule],
+        imports: [prisma_module_1.PrismaModule, todos_module_1.TodosModule, siswa_module_1.SiswaModule, users_module_1.UsersModule, bcrypt_module_1.BcryptModule, auth_module_1.AuthModule],
         controllers: [app_controller_1.AppController, user_controller_1.UserController, menu_controller_1.MenuController],
         providers: [app_service_1.AppService, user_service_1.UserService, menu_service_1.MenuService, bcrypt_service_1.BcryptService,],
     })

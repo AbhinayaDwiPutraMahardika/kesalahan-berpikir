@@ -10,12 +10,13 @@ export class UsersService {
   constructor(private prisma: PrismaService, private readonly bcrypt: BcryptService) { }
   async create(createUserDto: CreateUserDto) {
     try {
-      const { name, email, password } = createUserDto;
+      const { name, email, password, role } = createUserDto;
       const users = await this.prisma.user.create({
         data: {
           name,
           email,
           password: await this.bcrypt.hashPassword(password),
+          role
         },
       });
       return {
@@ -51,7 +52,7 @@ export class UsersService {
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     try {
-      const { name, email, password } = updateUserDto
+      const { name, email, password, role } = updateUserDto
       const findUser = await this.prisma.user.findFirst({
         where: { id: id }
       })
@@ -68,7 +69,8 @@ export class UsersService {
         data: {
           name: name ?? findUser.name,
           email: email ?? findUser.email,
-          password: password ? await this.bcrypt.hashPassword(password) : findUser.password
+          password: password ? await this.bcrypt.hashPassword(password) : findUser.password,
+          role: role ?? findUser.role
         }
       })
       return {

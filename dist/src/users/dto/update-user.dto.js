@@ -13,10 +13,12 @@ exports.UpdateUserDto = void 0;
 const mapped_types_1 = require("@nestjs/mapped-types");
 const create_user_dto_1 = require("./create-user.dto");
 const class_validator_1 = require("class-validator");
+const client_1 = require("@prisma/client");
 class UpdateUserDto extends (0, mapped_types_1.PartialType)(create_user_dto_1.CreateUserDto) {
     name;
     email;
     password;
+    role;
 }
 exports.UpdateUserDto = UpdateUserDto;
 __decorate([
@@ -34,4 +36,9 @@ __decorate([
     (0, class_validator_1.IsStrongPassword)(),
     __metadata("design:type", String)
 ], UpdateUserDto.prototype, "password", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateUserDto.prototype, "role", void 0);
 //# sourceMappingURL=update-user.dto.js.map

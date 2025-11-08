@@ -22,12 +22,13 @@ let UsersService = class UsersService {
     }
     async create(createUserDto) {
         try {
-            const { name, email, password } = createUserDto;
+            const { name, email, password, role } = createUserDto;
             const users = await this.prisma.user.create({
                 data: {
                     name,
                     email,
                     password: await this.bcrypt.hashPassword(password),
+                    role
                 },
             });
             return {
@@ -63,7 +64,7 @@ let UsersService = class UsersService {
     }
     async update(id, updateUserDto) {
         try {
-            const { name, email, password } = updateUserDto;
+            const { name, email, password, role } = updateUserDto;
             const findUser = await this.prisma.user.findFirst({
                 where: { id: id }
             });
@@ -79,7 +80,8 @@ let UsersService = class UsersService {
                 data: {
                     name: name ?? findUser.name,
                     email: email ?? findUser.email,
-                    password: password ? await this.bcrypt.hashPassword(password) : findUser.password
+                    password: password ? await this.bcrypt.hashPassword(password) : findUser.password,
+                    role: role ?? findUser.role
                 }
             });
             return {
