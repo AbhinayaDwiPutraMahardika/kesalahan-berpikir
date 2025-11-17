@@ -12,9 +12,10 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { BcryptService } from './bcrypt/bcrypt.service';
 import { BcryptModule } from './bcrypt/bcrypt.module';
 import { AuthModule } from './auth/auth.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
-  imports: [PrismaModule, TodosModule, SiswaModule, UsersModule, BcryptModule, AuthModule],
+  imports: [PrismaModule, TodosModule, SiswaModule, UsersModule, BcryptModule, AuthModule, TransactionModule],
   controllers: [AppController, UserController, MenuController],
   providers: [AppService, UserService, MenuService, BcryptService,],
 })

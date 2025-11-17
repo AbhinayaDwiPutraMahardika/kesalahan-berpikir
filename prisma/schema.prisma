@@ -54,6 +54,7 @@ model Transaction {
   id                 Int                  @id @default(autoincrement())
   total              Int
   paymentMethod      Payment              @default(QRIS)
+  orderName          String               @default("")
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   user               User?                @relation(fields: [userId], references: [id])
@@ -62,12 +63,13 @@ model Transaction {
 }
 
 model Detail_Transaction {
-  id            Int          @id @default(autoincrement())
-  quantity      Int
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  Menu          Menu?        @relation(fields: [menuId], references: [id])
-  menuId        Int?
-  Transaction   Transaction? @relation(fields: [transactionId], references: [id])
-  transactionId Int?
-}
+  id             Int          @id @default(autoincrement())
+  quantity       Int
+  purchase_price Int
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  Menu           Menu?        @relation(fields: [menuId], references: [id])
+  menuId         Int?
+  Transaction    Transaction? @relation(fields: [transactionId], references: [id])
+  transactionId  Int?
+} 
